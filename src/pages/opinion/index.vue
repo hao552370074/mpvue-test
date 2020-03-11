@@ -2,6 +2,7 @@
   <div>
     <p @click="kk">返回</p>
     <p>这里是跳转页面测试</p>
+    <van-button>测试</van-button>
     <button open-type="contact" bindcontact="handleContact">客服</button>
     <button @click="ff" v-if="ffs">111</button>
     <button @click="login" v-if="ffs">Login</button>
