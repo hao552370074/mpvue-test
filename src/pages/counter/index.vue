@@ -4,6 +4,7 @@
     <p>
       <button @click="increment">+</button>
       <button @click="decrement">-</button>
+      <button @click="test">Test</button>
     </p>
   </div>
 </template>
@@ -13,6 +14,12 @@
 import store from './store'
 
 export default {
+  name:'name',
+  data() {
+    return {
+      aa:'',
+    }
+  },
   computed: {
     count () {
       return store.state.count
@@ -24,8 +31,17 @@ export default {
     },
     decrement () {
       store.commit('decrement')
+    },
+    test(){
+      store.dispatch('getTodos');
     }
-  }
+  },
+  created() {
+    
+  },
+  mounted() {
+    
+  },
 }
 </script>
 
