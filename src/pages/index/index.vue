@@ -151,7 +151,6 @@ export default {
       // });
     }
   },
-
   // 这里是下拉刷新
   onPullDownRefresh() {
     console.log("下拉刷新");

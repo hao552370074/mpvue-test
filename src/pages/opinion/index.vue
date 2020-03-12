@@ -1,8 +1,17 @@
 <template>
-  <div>
+  <div >
+    <van-nav-bar
+      title="标题"
+      left-text="返回"
+      right-text="按钮"
+      left-arrow
+      @clickLeft="onClickLeft"
+      @clickRight="onClickRight"
+    />
     <p @click="kk">返回</p>
     <p>这里是跳转页面测试</p>
-    <van-button>测试</van-button>
+    <van-button type="warning">测试</van-button>
+    <van-button type="primary">测试</van-button>
     <button open-type="contact" bindcontact="handleContact">客服</button>
     <button @click="ff" v-if="ffs">111</button>
     <button @click="login" v-if="ffs">Login</button>
@@ -19,6 +28,16 @@
       @getuserinfo="bindGetUserInfo"
       @click="getUserInfoClick"
     >获取权限</button>
+    <div v-for="(item,index) in data" :key="index">
+      <p>{{item.author}}</p>
+      <p>{{item.dynasty}}</p>
+      <p>{{item.title}}</p>
+      <p>{{item.article}}</p>
+      <p>{{item.useless_data}}</p>
+    </div>
+    <div style="margin:0 0 0 37%;overflow:hidden">
+      <van-loading v-show="loading" size="24px" color="#1989fa"><p style="color:#1989fa">加载中...</p></van-loading>
+    </div>
   </div>
 </template>
 
@@ -32,12 +51,118 @@ export default {
     return {
       aa: "",
       ffs: true,
+      loading: false,
       name: null,
-      imgs: null
+      imgs: null,
+      data: [
+        {
+          author: "作者",
+          dynasty: "作者朝代",
+          title: "文章题目",
+          article: "文章的具体内容",
+          useless_data:
+            "没什么用的数据，纯粹为了增加数据长度，能更快查看到异常的抛出。",
+          share_times: 0,
+          like_times: 0,
+          id: "0"
+        },
+        {
+          author: "作者",
+          dynasty: "作者朝代",
+          title: "文章题目",
+          article: "文章的具体内容",
+          useless_data:
+            "没什么用的数据，纯粹为了增加数据长度，能更快查看到异常的抛出。",
+          share_times: 0,
+          like_times: 0,
+          id: "0"
+        },
+        {
+          author: "作者",
+          dynasty: "作者朝代",
+          title: "文章题目",
+          article: "文章的具体内容",
+          useless_data:
+            "没什么用的数据，纯粹为了增加数据长度，能更快查看到异常的抛出。",
+          share_times: 0,
+          like_times: 0,
+          id: "0"
+        },
+        {
+          author: "作者",
+          dynasty: "作者朝代",
+          title: "文章题目",
+          article: "文章的具体内容",
+          useless_data:
+            "没什么用的数据，纯粹为了增加数据长度，能更快查看到异常的抛出。",
+          share_times: 0,
+          like_times: 0,
+          id: "0"
+        },
+      ]
     };
   },
   computed: {},
+  // 这里是下拉刷新
+  onPullDownRefresh() {
+    console.log("下拉刷新");
+    setTimeout(() => {
+      // 0.6秒后停止刷新
+      wx.stopPullDownRefresh();
+    }, 600);
+  },
+  // 这里是到底事件
+  onReachBottom() {
+    console.log("到底了");
+    this.loading=true;
+    setTimeout(() => {
+      this.data.push({
+        author: "作者",
+        dynasty: "作者朝代",
+        title: "文章题目",
+        article: "文章的具体内容",
+        useless_data:
+          "没什么用的数据，纯粹为了增加数据长度，能更快查看到异常的抛出。",
+        share_times: 0,
+        like_times: 0,
+        id: "0"
+      });
+      this.loading=false;
+      console.log(this.data);
+    }, 1200);
+  },
   methods: {
+    onClickLeft() {
+      var QQMapWX = require("../../../static/qqmap/qqmap-wx-jssdk");
+      var qqmapsdk;
+      var that = this;
+      // 实例化腾讯地图API核心类
+      qqmapsdk = new QQMapWX({
+        key: "HZ2BZ-J5RW6-MPZSX-M4LNI-SVKZT-DZFX3" // 必填
+      });
+      //1、获取当前位置坐标
+      wx.getLocation({
+        type: "wgs84",
+        success: function(res) {
+          //2、根据坐标获取当前位置名称，显示在顶部:腾讯地图逆地址解析
+          qqmapsdk.reverseGeocoder({
+            location: {
+              latitude: res.latitude,
+              longitude: res.longitude
+            },
+            success: function(res) {
+              console.log(res);
+            },
+            fail: function(res) {
+              console.log(res, "错误");
+            }
+          });
+        }
+      });
+    },
+    onClickRight() {
+      console.log(2);
+    },
     // 调用客服
     handleContact(e) {
       console.log(e.detail.path);
@@ -120,8 +245,25 @@ export default {
               success() {
                 // 用户已经同意
                 //其他操作...
+                wx.getLocation({
+                  type: "gcj02", //返回可以用于wx.openLocation的经纬度
+                  success(res) {
+                    console.log(res, "res");
+
+                    const latitude = res.latitude;
+                    const longitude = res.longitude;
+                    wx.openLocation({
+                      latitude,
+                      longitude,
+                      scale: 18,
+                      success: function(res) {
+                        console.log(res);
+                      }
+                    });
+                  }
+                });
                 console.log("用户已经同意位置授权");
-                that.ffs = false;
+                // that.ffs = false;
               },
               fail() {
                 that.ffs = true;
@@ -179,6 +321,7 @@ export default {
   },
   created() {},
   mounted() {
+    this.onClickLeft();
     let that = this;
     wx.getUserInfo({
       success: function(res) {
