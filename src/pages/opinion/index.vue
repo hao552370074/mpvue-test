@@ -1,5 +1,6 @@
 <template>
   <div >
+    {{ok}}
     <van-nav-bar
       title="标题"
       left-text="返回"
@@ -54,6 +55,7 @@ export default {
       loading: false,
       name: null,
       imgs: null,
+      ok: this.$store.state.houseContent,
       data: [
         {
           author: "作者",
@@ -319,7 +321,10 @@ export default {
       });
     }
   },
-  created() {},
+  created() {
+    console.log(this.$store.state.houseContent);
+    
+  },
   mounted() {
     this.onClickLeft();
     let that = this;
