@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     {{ok}}
     <van-nav-bar
       title="标题"
@@ -37,7 +37,9 @@
       <p>{{item.useless_data}}</p>
     </div>
     <div style="margin:0 0 0 37%;overflow:hidden">
-      <van-loading v-show="loading" size="24px" color="#1989fa"><p style="color:#1989fa">加载中...</p></van-loading>
+      <van-loading v-show="loading" size="24px" color="#1989fa">
+        <p style="color:#1989fa">加载中...</p>
+      </van-loading>
     </div>
   </div>
 </template>
@@ -100,7 +102,7 @@ export default {
           share_times: 0,
           like_times: 0,
           id: "0"
-        },
+        }
       ]
     };
   },
@@ -110,13 +112,14 @@ export default {
     console.log("下拉刷新");
     setTimeout(() => {
       // 0.6秒后停止刷新
+      this.onClickLeft();
       wx.stopPullDownRefresh();
     }, 600);
   },
   // 这里是到底事件
   onReachBottom() {
     console.log("到底了");
-    this.loading=true;
+    this.loading = true;
     setTimeout(() => {
       this.data.push({
         author: "作者",
@@ -129,7 +132,7 @@ export default {
         like_times: 0,
         id: "0"
       });
-      this.loading=false;
+      this.loading = false;
       console.log(this.data);
     }, 1200);
   },
@@ -163,7 +166,7 @@ export default {
       });
     },
     onClickRight() {
-      console.log(2);
+
     },
     // 调用客服
     handleContact(e) {
@@ -209,6 +212,7 @@ export default {
     bindGetUserInfo(e) {
       // console.log('回调事件后触发')
       // console.log(e);
+console.log(e);
 
       const that = this;
       if (e.mp.detail.userInfo) {
@@ -323,7 +327,6 @@ export default {
   },
   created() {
     console.log(this.$store.state.houseContent);
-    
   },
   mounted() {
     this.onClickLeft();

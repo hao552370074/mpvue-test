@@ -10,7 +10,7 @@
       circular="true"
       skip-hidden-item-layout="true"
     >
-      <swiper-item style="background-color:red">
+      <swiper-item style="background-color:red" @click="skip(1)">
         <div class="item">A</div>
       </swiper-item>
       <swiper-item style="background-color: darkcyan;">
@@ -44,6 +44,10 @@ export default {
   methods: {
     switchItem(e,r){
       console.log(e,r);
+      
+    },
+    skip(i){
+      console.log(i);
       
     }
   },

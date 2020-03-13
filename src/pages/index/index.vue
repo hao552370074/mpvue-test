@@ -8,11 +8,7 @@
         :src="userInfo.avatarUrl"
         background-size="cover"
       />
-      <img
-        class="userinfo-avatar"
-        src="/static/images/user.png"
-        background-size="cover"
-      />
+      <img class="userinfo-avatar" src="/static/images/user.png" background-size="cover" />
       <div class="userinfo-nickname">
         <card :text="userInfo.nickName"></card>
       </div>
@@ -29,24 +25,9 @@
     </div>
 
     <form class="form-container">
-      <input
-        type="text"
-        class="form-control"
-        :value="motto"
-        placeholder="v-model"
-      />
-      <input
-        type="text"
-        class="form-control"
-        v-model="motto"
-        placeholder="v-model"
-      />
-      <input
-        type="text"
-        class="form-control"
-        v-model.lazy="motto"
-        placeholder="v-model.lazy"
-      />
+      <input type="text" class="form-control" :value="motto" placeholder="v-model" />
+      <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
+      <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
     </form>
 
     <a href="/pages/counter/main" class="counter">去往Vuex示例页面11</a>
@@ -60,7 +41,7 @@
 
 <script>
 import card from "@/components/card";
-import {showSuccess,showModal,get,post} from "../../utils/util.js";
+import { showSuccess, showModal, get, post } from "../../utils/util.js";
 export default {
   data() {
     return {
@@ -89,20 +70,20 @@ export default {
       console.log("clickHandle:", ev);
       // throw {message: 'custom test'}
     },
-    async btn() {
-      try {
-        let res = await get("1", 1);
-        console.log(res, "成功");
-      } catch (error) {
-        console.log(error, "失败");
-        // showModal('错误','请重新登录',false)
-        showSuccess('错误')
-      }
-
+    btn() {
+      // try {
+      //   let res = await get("1", 1);
+      //   console.log(res, "成功");
+      // } catch (error) {
+      //   console.log(error, "失败");
+      //   // showModal('错误','请重新登录',false)
+      //   showSuccess('错误')
+      // }
+      
       // 跳转方法
-      // wx.navigateTo({
-      //   url:'/pages/opinion/main'
-      // })
+      wx.navigateTo({
+        url:`/pages/opinion/main?isPlayboy=${10086}`
+      })
 
       // 成功弹窗
       // wx.showToast({
@@ -164,11 +145,11 @@ export default {
     console.log("到底了");
   },
   // 分享功能
-  onShareAppMessage(){
+  onShareAppMessage() {
     return {
-      title:'第一个',
-      path:'/src/pages/index/main'
-    }
+      title: "第一个",
+      path: "/src/pages/index/main"
+    };
   },
   created() {
     // let app = getApp()
