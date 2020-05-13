@@ -30,7 +30,7 @@
       <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
     </form>
 
-    <a href="/pages/counter/main" class="counter">去往Vuex示例页面11</a>
+    <a href="/pages/counter/main" class="counter">去往Vuex示例页面111</a>
 
     <div class="all">
       <div class="left"></div>
@@ -40,17 +40,17 @@
 </template>
 
 <script>
-import card from "@/components/card";
-import { showSuccess, showModal, get, post } from "../../utils/util.js";
+import card from '@/components/card'
+// import { showSuccess, showModal, get, post } from '../../utils/util.js'
 export default {
-  data() {
+  data () {
     return {
-      motto: "Hello miniprograme",
+      motto: 'Hello miniprograme',
       userInfo: {
-        nickName: "mpvue",
-        avatarUrl: "http://mpvue.com/assets/logo.png"
+        nickName: 'mpvue',
+        avatarUrl: 'http://mpvue.com/assets/logo.png'
       }
-    };
+    }
   },
 
   components: {
@@ -58,31 +58,30 @@ export default {
   },
 
   methods: {
-    bindViewTap() {
-      const url = "../logs/main";
-      if (mpvuePlatform === "wx") {
-        mpvue.switchTab({ url });
+    bindViewTap () {
+      const url = '../logs/main'
+      if (mpvuePlatform === 'wx') {
+        mpvue.switchTab({ url })
       } else {
-        mpvue.navigateTo({ url });
+        mpvue.navigateTo({ url })
       }
     },
-    clickHandle(ev) {
-      console.log("clickHandle:", ev);
+    clickHandle (ev) {
+      console.log('clickHandle:', ev)
       // throw {message: 'custom test'}
     },
-    btn() {
+    btn () {
       // try {
-      //   let res = await get("1", 1);
-      //   console.log(res, "成功");
+      //   let res = await get("1", 1)
+      //   console.log(res, "成功")
       // } catch (error) {
-      //   console.log(error, "失败");
+      //   console.log(error, "失败")
       //   // showModal('错误','请重新登录',false)
       //   showSuccess('错误')
       // }
-      
       // 跳转方法
       wx.navigateTo({
-        url:`/pages/opinion/main?isPlayboy=${10086}`
+        url: `/pages/opinion/main?isPlayboy=${10086}`
       })
 
       // 成功弹窗
@@ -110,51 +109,52 @@ export default {
       // wx.showActionSheet({
       //   itemList: ["A", "B", "C"],
       //   success(res) {
-      //     console.log(res.tapIndex);
+      //     console.log(res.tapIndex)
       //   },
       //   fail(res) {
-      //     console.log(res.errMsg);
+      //     console.log(res.errMsg)
       //   }
-      // });
+      // })
 
       // // 标题加载
       // wx.showNavigationBarLoading({
       //   success: res => {
-      //     console.log(res);
+      //     console.log(res)
       //     // 0.6秒结束标题加载
       //     setTimeout(() => {
-      //       wx.hideNavigationBarLoading();
-      //     }, 600);
+      //       wx.hideNavigationBarLoading()
+      //     }, 600)
       //   },
       //   fail: error => {
-      //     console.log(error);
+      //     console.log(error)
       //   }
-      // });
+      // })
     }
   },
   // 这里是下拉刷新
-  onPullDownRefresh() {
-    console.log("下拉刷新");
+  onPullDownRefresh () {
+    console.log('下拉刷新')
     setTimeout(() => {
       // 0.6秒后停止刷新
-      wx.stopPullDownRefresh();
-    }, 600);
+      wx.stopPullDownRefresh()
+    }, 600)
   },
   // 这里是到底事件
-  onReachBottom() {
-    console.log("到底了");
+  onReachBottom () {
+    console.log('到底了')
   },
   // 分享功能
-  onShareAppMessage() {
+  onShareAppMessage () {
     return {
-      title: "第一个",
-      path: "/src/pages/index/main"
-    };
+      title: '第一个',
+      path: '/src/pages/index/main'
+    }
   },
-  created() {
+  created () {
     // let app = getApp()
+    console.log(this.$store.state.houseContent)
   }
-};
+}
 </script>
 
 <style scoped>

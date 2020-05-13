@@ -1,5 +1,5 @@
 const state = {
-  houseContent: "迩伶贰blog"
-};
+  houseContent: '迩伶贰blog'
+}
 
-export default state;
+export default state

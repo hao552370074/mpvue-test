@@ -14,10 +14,10 @@
 import store from './store'
 
 export default {
-  name:'name',
-  data() {
+  name: 'name',
+  data () {
     return {
-      aa:'',
+      aa: ''
     }
   },
   computed: {
@@ -32,16 +32,12 @@ export default {
     decrement () {
       store.commit('decrement')
     },
-    test(){
-      store.dispatch('getTodos');
+    test () {
+      store.dispatch('getTodos')
     }
   },
-  created() {
-    
-  },
-  mounted() {
-    
-  },
+  created () {},
+  mounted () {}
 }
 </script>
 

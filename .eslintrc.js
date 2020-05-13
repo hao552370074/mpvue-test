@@ -19,6 +19,10 @@ module.exports = {
   ],
   // add your custom rules here
   'rules': {
+    // 禁止tab缩进
+    'no-tabs':0,
+    // 禁止空格和tab的混合缩进
+    'no-mixed-spaces-and-tabs':0,
     // allow paren-less arrow functions
     'arrow-parens': 0,
     // allow async-await
